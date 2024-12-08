@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discounter Off</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #001F3F;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.1);
+        }
+        .discount-info {
+            background-color: #003366;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .discount-info.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Discounter Off</h1>
+        <div class="logo-container">
+            <img src="https://logo.clearbit.com/amazon.com" alt="Amazon" class="logo" data-name="Amazon">
+            <img src="https://logo.clearbit.com/flipkart.com" alt="Flipkart" class="logo" data-name="Flipkart">
+            <img src="https://logo.clearbit.com/ebay.com" alt="eBay" class="logo" data-name="eBay">
+        </div>
+        <div id="discountInfo" class="discount-info"></div>
+    </div>
+
+    <script>
+        const shoppingApps = [
+            {
+                name: 'Amazon',
+                url: 'https://www.amazon.com',
+                discountInfo: 'Find products with 70%, 80%, and 90% discounts'
+            },
+            {
+                name: 'Flipkart',
+                url: 'https://www.flipkart.com',
+                discountInfo: 'Explore special sales with highest discounts'
+            },
+            {
+                name: 'eBay',
+                url: 'https://www.ebay.com',
+                discountInfo: 'Discover daily deals with massive discounts'
+            }
+        ];
+
+        const discountInfoElement = document.getElementById('discountInfo');
+
+        document.querySelectorAll('.logo').forEach(logo => {
+            logo.addEventListener('click', () => {
+                const appName = logo.getAttribute('data-name');
+                const app = shoppingApps.find(app => app.name === appName);
+                
+                if (app) {
+                    window.open(app.url, '_blank');
+                    discountInfoElement.textContent = `${app.name} Discount Feature: ${app.discountInfo}`;
+                    discountInfoElement.classList.add('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
